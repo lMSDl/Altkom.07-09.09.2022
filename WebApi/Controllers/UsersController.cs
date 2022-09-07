@@ -13,8 +13,10 @@ namespace WebApi.Controllers
 
         [NonAction]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public override Task<IActionResult> Post(User entity)
+        public override async Task<IActionResult> Post(User entity)
         {
+            await Task.Yield();
+            //return StatusCode(StatusCodes.Status418ImATeapot);
             throw new Exception();
         }
     }
