@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.ResponseCompression;
 using Models;
 using Services.Bogus;
 using Services.Bogus.Fakers;
@@ -19,6 +20,18 @@ builder.Services.AddTransient<ShoppingListItemFaker>();
 
 builder.Services.AddSingleton<ICrudService<User>>(x => new CrudService<User>(x.GetService<UserFaker>(), 10));
 builder.Services.AddTransient<UserFaker>();
+
+
+builder.Services.AddResponseCompression(x =>
+{
+    x.EnableForHttps = true;
+
+    x.Providers.Clear();
+    //x.Providers.Add<GzipCompressionProvider>();
+    x.Providers.Add<BrotliCompressionProvider>();
+
+});
+
 
 var app = builder.Build();
 
@@ -43,7 +56,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-//app.UseResponseCompression();
+app.UseResponseCompression();
 //app.UseResponseCaching();
 
 //app.UseRouting();
