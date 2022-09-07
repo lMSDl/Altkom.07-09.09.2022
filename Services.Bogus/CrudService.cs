@@ -4,30 +4,28 @@ using Services.Interfaces;
 
 namespace Services.Bogus
 {
-    public class ShoppingListService : IShoppingListService
+    public class CrudService<T> : ICrudService<T> where T : Entity
     {
-        private ICollection<ShoppingList> Entities { get; }
-        //private ICollection<ShoppingList> Entities { get; } = new List<ShoppingList> { new ShoppingList { Id = 10, Name = "123123", DateTime = DateTime.Now } };
+        private ICollection<T> Entities { get; }
 
-
-        public ShoppingListService(ShoppingListFaker faker, int count = 5)
+        public CrudService(BaseFaker<T> faker, int count = 5)
         {
             Entities = faker.Generate(count);
         }
 
-        public Task<ShoppingList?> ReadAsync(int id)
+        public Task<T?> ReadAsync(int id)
         {
             var entity = Entities.SingleOrDefault(x => x.Id == id);
 
             return Task.FromResult(entity);
         }
 
-        public Task<IEnumerable<ShoppingList>> ReadAsync()
+        public Task<IEnumerable<T>> ReadAsync()
         {
             return Task.FromResult(Entities.AsEnumerable());
         }
 
-        public Task<ShoppingList> CreateAsync(ShoppingList entity)
+        public Task<T> CreateAsync(T entity)
         {
             entity.Id = Entities.Max(x => x.Id) + 1;
             Entities.Add(entity);
@@ -35,7 +33,7 @@ namespace Services.Bogus
             return Task.FromResult(entity);
         }
 
-        public async Task UpdateAsync(int id, ShoppingList entity)
+        public async Task UpdateAsync(int id, T entity)
         {
             await DeleteAsync(id);
             entity.Id = id;

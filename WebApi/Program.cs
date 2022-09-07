@@ -1,3 +1,4 @@
+using Models;
 using Services.Bogus;
 using Services.Bogus.Fakers;
 using Services.Interfaces;
@@ -9,14 +10,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IShoppingListService, ShoppingListService>();
+//builder.Services.AddSingleton<IShoppingListService>(x => new ShoppingListService(x.GetService<ShoppingListFaker>(), 55));
 builder.Services.AddTransient<ShoppingListFaker>();
 
+builder.Services.AddSingleton<IShoppingListItemService, ShoppingListItemService>();
+builder.Services.AddTransient<ShoppingListItemFaker>();
+
+
+builder.Services.AddSingleton<ICrudService<User>>(x => new CrudService<User>(x.GetService<UserFaker>(), 10));
+builder.Services.AddTransient<UserFaker>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
 
 if (app.Environment.IsDevelopment())
 {
