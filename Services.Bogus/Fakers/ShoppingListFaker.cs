@@ -12,7 +12,7 @@ namespace Services.Bogus.Fakers
         public ShoppingListFaker()
         {
             RuleFor(x => x.DateTime, x => x.Date.Recent());
-            RuleFor(x => x.Name, x => x.Name.Random.String());
+            RuleFor(x => x.Name, x => x.Commerce.Department());
         }
     }
 }
