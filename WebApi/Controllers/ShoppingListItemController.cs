@@ -35,6 +35,17 @@ namespace WebApi.Controllers
             if (await _parentService.ReadAsync(parentId) == null)
                 return NotFound();
 
+            var items = await _service.ReadCollectionAsync(parentId);
+            if(items.Any(x => x.Name == entity.Name))
+            {
+                ModelState.AddModelError(nameof(ShoppingListItem.Name), "Name must be unique");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
             entity = await _service.CreateAsync(parentId, entity);
 
             return CreatedAtAction(nameof(Get), new { Id = entity.Id }, entity);

@@ -49,6 +49,8 @@ builder.Services.AddResponseCompression(x =>
 
 });
 
+//wy³¹czamy domyœln¹, globaln¹ walidacjê modlu
+builder.Services.Configure<ApiBehaviorOptions>(x => x.SuppressModelStateInvalidFilter = true);
 
 var app = builder.Build();
 
