@@ -1,14 +1,31 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Models;
 using Services.Bogus;
 using Services.Bogus.Fakers;
 using Services.Interfaces;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(/*x => x.Filters.Add(new ProducesAttribute("application/xml"))*/)
+    /*.AddJsonOptions(x =>
+    {
+        x.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.WriteAsString;
+        x.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
+        x.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    })*/
+    .AddNewtonsoftJson(x =>
+    {
+        x.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+        x.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
+        x.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+        x.SerializerSettings.DateFormatString = "yyy MMM-d _ h:mm;ss";
+        })
+    .AddXmlSerializerFormatters();
 
 builder.Services.AddSingleton<IShoppingListService, ShoppingListService>();
 //builder.Services.AddSingleton<IShoppingListService>(x => new ShoppingListService(x.GetService<ShoppingListFaker>(), 55));
