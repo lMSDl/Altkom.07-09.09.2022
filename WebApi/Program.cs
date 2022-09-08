@@ -1,10 +1,15 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.IdentityModel.Tokens;
 using Models;
 using Services.Bogus;
 using Services.Bogus.Fakers;
 using Services.Interfaces;
+using System.Text;
 using System.Text.Json.Serialization;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +58,23 @@ builder.Services.AddResponseCompression(x =>
 
 //wy³¹czamy domyœln¹, globaln¹ walidacjê modlu
 builder.Services.Configure<ApiBehaviorOptions>(x => x.SuppressModelStateInvalidFilter = true);
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+ {
+     x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+     {
+         ValidateAudience = false,
+         ValidateIssuer = false,
+         ClockSkew = TimeSpan.FromSeconds(15),
+         ValidateIssuerSigningKey = true,
+         IssuerSigningKey = new SymmetricSecurityKey(AuthService.Key)
+     };
+ });
+builder.Services.AddSingleton<AuthService>();
 
 var app = builder.Build();
 

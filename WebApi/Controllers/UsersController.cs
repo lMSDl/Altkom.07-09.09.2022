@@ -1,14 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
+using WebApi.Services;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     public class UsersController : CrudController<User>
     {
-        public UsersController(ICrudService<User> service) : base(service)
+        private AuthService _authService;
+
+        public UsersController(ICrudService<User> service, AuthService authService) : base(service)
         {
+            _authService = authService;
         }
 
         [NonAction]
@@ -18,6 +24,17 @@ namespace WebApi.Controllers
             await Task.Yield();
             //return StatusCode(StatusCodes.Status418ImATeapot);
             throw new Exception();
+        }
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public IActionResult Login(User user)
+        {
+            var token = _authService.Authenticate(user.UserName, user.Password);
+            if (token == null)
+                return BadRequest();
+
+            return Ok(token);
         }
     }
 }
