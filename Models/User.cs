@@ -15,7 +15,7 @@ namespace Models
         //[DataMember]
         public string UserName { get; set; }
 
-        [JsonProperty("Password")]
+        [JsonProperty("password")]
         //[DataMember]
         public string SetPassword { set { Password = value; } }
         [JsonIgnore]

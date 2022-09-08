@@ -25,11 +25,12 @@ builder.Services.AddControllers(/*x => x.Filters.Add(new ProducesAttribute("appl
     })*/
     .AddNewtonsoftJson(x =>
     {
+        x.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
         x.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
         x.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
         x.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
-        x.SerializerSettings.DateFormatString = "yyy MMM-d _ h:mm;ss";
-        x.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All;
+        //x.SerializerSettings.DateFormatString = "yyy MMM-d _ h:mm;ss";
+        //x.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All;
     });
     //.AddXmlDataContractSerializerFormatters()
     /*.AddXmlSerializerFormatters()*/;
