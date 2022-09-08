@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,6 +10,13 @@ namespace WebApi.Services
     public class AuthService
     {
         public static byte[] Key { get; } = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
+
+        private ILogger<AuthService> _logger;
+
+        public AuthService(ILogger<AuthService> logger)
+        {
+            _logger = logger;
+        }
 
         public string Authenticate(string login, string password)
         {
@@ -37,6 +45,8 @@ namespace WebApi.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            _logger.LogInformation($"User {login} authenticated");
 
             return tokenHandler.WriteToken(token);
         }
