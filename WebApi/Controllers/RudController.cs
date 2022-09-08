@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
@@ -30,6 +31,7 @@ namespace WebApi.Controllers
 
 
         [HttpPut("/api/[controller]/{id}")]
+        [Authorize(Roles = "Edit")]
         public async Task<IActionResult> Put(int id, T entity)
         {
             if (await _service.ReadAsync(id) == null)
@@ -42,6 +44,10 @@ namespace WebApi.Controllers
 
 
         [HttpDelete("/api/[controller]/{id}")]
+        [Authorize(Roles = "Delete")] // \
+                                      //  => adnotacje jedna pod drugą - potrzebujemy obydwu uprawnień
+        [Authorize(Roles = "Admin")]  // /
+        //[Authorize(Roles = "Delete, Admin")] //role po przecinku - potrzebujemy jednej z nich
         public async Task<IActionResult> Delete(int id)
         {
             if (await _service.ReadAsync(id) == null)

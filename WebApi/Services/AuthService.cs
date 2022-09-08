@@ -18,8 +18,12 @@ namespace WebApi.Services
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, login)
+                new Claim(ClaimTypes.Name, login),
+                new Claim(ClaimTypes.Role, "Read"),
+                new Claim(ClaimTypes.Role, "Delete"),
+
             };
+
 
             var identity = new ClaimsIdentity(claims);
 
