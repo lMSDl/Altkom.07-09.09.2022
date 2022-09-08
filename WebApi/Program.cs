@@ -52,8 +52,8 @@ builder.Services.AddResponseCompression(x =>
     x.EnableForHttps = true;
 
     x.Providers.Clear();
-    //x.Providers.Add<GzipCompressionProvider>();
-    x.Providers.Add<BrotliCompressionProvider>();
+    x.Providers.Add<GzipCompressionProvider>();
+    //x.Providers.Add<BrotliCompressionProvider>();
 
 });
 
