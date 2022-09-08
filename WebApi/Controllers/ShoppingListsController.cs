@@ -20,6 +20,10 @@ namespace WebApi.Controllers
             return Ok(new ShoppingList() { Name = name });
         }
 
-
+        [ProducesResponseType(typeof(IEnumerable<ShoppingList>), 200)]
+        public override Task<IActionResult> Get()
+        {
+            return base.Get();
+        }
     }
 }

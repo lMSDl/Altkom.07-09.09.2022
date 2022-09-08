@@ -28,6 +28,8 @@ namespace WebApi.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Login(User user)
         {
             var token = _authService.Authenticate(user.UserName, user.Password);

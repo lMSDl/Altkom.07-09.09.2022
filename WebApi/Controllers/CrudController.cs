@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         [HttpGet]
         [Authorize(Roles = "Read")]
         //public Task<IEnumerable<ShoppingList>> Get()
-        public async Task<IActionResult> Get()
+        public virtual async Task<IActionResult> Get()
         {
             return Ok(await _service.ReadAsync());
         }

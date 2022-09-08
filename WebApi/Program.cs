@@ -77,12 +77,18 @@ builder.Services.AddAuthentication(x =>
  });
 builder.Services.AddSingleton<AuthService>();
 
+
+builder.Services.AddSwaggerGen(x => x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "WebApi", Version = "v1" }))
+    .AddSwaggerGenNewtonsoftSupport();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 
+app.UseSwagger();
+app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "SwaggerWebApi v1"));
 
 if (app.Environment.IsDevelopment())
 {
