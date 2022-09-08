@@ -44,10 +44,11 @@ namespace WebApi.Controllers
 
 
         [HttpDelete("/api/[controller]/{id}")]
-        [Authorize(Roles = "Delete")] // \
-                                      //  => adnotacje jedna pod drugą - potrzebujemy obydwu uprawnień
-        [Authorize(Roles = "Admin")]  // /
+        [Authorize(Roles = nameof(Roles.Delete))] // \
+                                                    //  => adnotacje jedna pod drugą - potrzebujemy obydwu uprawnień
+        [Authorize(Roles = nameof(Roles.Admin))]  // /
         //[Authorize(Roles = "Delete, Admin")] //role po przecinku - potrzebujemy jednej z nich
+        //[Authorize(Roles = $"{nameof(Roles.Admin)}, {nameof(Roles.Admin)}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (await _service.ReadAsync(id) == null)

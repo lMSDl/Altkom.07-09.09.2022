@@ -22,6 +22,8 @@ namespace Models
         //[DataMember]
         public string Password { get; set; }
 
+        public Roles Role { get; set; } = Roles.Create | Roles.Read;
+
 
         /*public bool ShouldSerializePassword()
         {

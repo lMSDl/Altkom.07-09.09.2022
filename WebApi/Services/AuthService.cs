@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -16,13 +17,15 @@ namespace WebApi.Services
                 return null;
             }
 
+            User user = new User() { UserName = "admin", Role = Roles.Read | Roles.Delete | Roles.Admin };
+
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, login),
-                new Claim(ClaimTypes.Role, "Read"),
-                new Claim(ClaimTypes.Role, "Delete"),
+                new Claim(ClaimTypes.Name, login)
 
             };
+
+            claims.AddRange(user.Role.ToString().Split(", ").Select(x => new Claim(ClaimTypes.Role, x)));
 
 
             var identity = new ClaimsIdentity(claims);
