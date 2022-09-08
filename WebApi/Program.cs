@@ -24,8 +24,9 @@ builder.Services.AddControllers(/*x => x.Filters.Add(new ProducesAttribute("appl
         x.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
         x.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
         x.SerializerSettings.DateFormatString = "yyy MMM-d _ h:mm;ss";
-        })
-    .AddXmlDataContractSerializerFormatters()
+        x.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All;
+    });
+    //.AddXmlDataContractSerializerFormatters()
     /*.AddXmlSerializerFormatters()*/;
 
 builder.Services.AddSingleton<IShoppingListService, ShoppingListService>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [DataContract]
+    //[DataContract]
     public abstract class Entity
     {
         public int Id { get; set; }

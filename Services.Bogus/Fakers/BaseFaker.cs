@@ -12,7 +12,7 @@ namespace Services.Bogus.Fakers
     {
         protected BaseFaker() : base("pl")
         {
-            StrictMode(true);
+            //StrictMode(true);
 
             RuleFor(x => x.Id, x => x.UniqueIndex + 1);
         }
