@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWIN", "OWIN\OWIN.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR", "SignalR\SignalR.csproj", "{775ED29F-7179-443D-85C1-D03A71FE023C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcService", "GrpcService\GrpcService.csproj", "{A25E07EE-973F-45C0-B7C9-13AF90337935}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{775ED29F-7179-443D-85C1-D03A71FE023C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{775ED29F-7179-443D-85C1-D03A71FE023C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{775ED29F-7179-443D-85C1-D03A71FE023C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A25E07EE-973F-45C0-B7C9-13AF90337935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A25E07EE-973F-45C0-B7C9-13AF90337935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A25E07EE-973F-45C0-B7C9-13AF90337935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A25E07EE-973F-45C0-B7C9-13AF90337935}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

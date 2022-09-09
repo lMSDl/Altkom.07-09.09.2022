@@ -1,5 +1,6 @@
 ﻿
 using Client;
+using Grpc.Net.Client;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using Newtonsoft.Json;
@@ -7,63 +8,21 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 
+using (var grpcChannel = GrpcChannel.ForAddress("https://localhost:7044")) {
+    var client = new GrpcService.Greeter.GreeterClient(grpcChannel);
 
-var signalR = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5299/signalR/Demo")
-                .WithAutomaticReconnect()
-                .Build();
+    var result = await client.SayHelloAsync(new GrpcService.HelloRequest() { Name = "Paul" });
 
-
-signalR.Reconnected += SignalR_Reconnected;
-signalR.Reconnecting += SignalR_Reconnecting;
-
-
-
-Task SignalR_Reconnecting(Exception? arg)
-{
-    Console.WriteLine("Reconnecting...");
-    return Task.CompletedTask;
-}
-
-Task SignalR_Reconnected(string? arg)
-{
-    Console.WriteLine("Reconnected!");
-    return Task.CompletedTask;
-}
-
-signalR.On<string>(nameof(HelloResponse), x => HelloResponse(x));
-signalR.On<string>("Echo", x => Console.WriteLine(x));
-
-signalR.On("Welcome", ConsoleWrite());
-signalR.On("NewConnection", ConsoleWrite());
-signalR.On("SendMessage", ConsoleWrite());
-
-await signalR.StartAsync();
-
-
-await signalR.SendAsync("SayHello");
-await signalR.SendAsync("SayHelloToMe", "Paul");
-
-if(DateTime.Now.Second % 2 == 0)
-    await signalR.SendAsync("JoinGroup", "myFavouriteGroup");
-
-
-
-while (true)
-{
-    var connectionId = Console.ReadLine();
-    await signalR.SendAsync("Echo", connectionId);
-    await signalR.SendAsync("SendMessage", connectionId, Console.ReadLine());
+    Console.WriteLine(result.Message);
 }
 
 
-Console.ReadLine();
+using (var grpcChannel = GrpcChannel.ForAddress("https://localhost:7044")) {
+    var usersClient = new GrpcUsersService.GrpcUsers.GrpcUsersClient(grpcChannel);
 
-void HelloResponse(string message)
-{
-    Console.WriteLine(message);
+    var users = await usersClient.ReadAsync(new GrpcUsersService.Void());
 }
-
+Console.Read();
 
 static async Task WebAPI()
 {
@@ -130,4 +89,63 @@ static async Task WebAPI()
 static Action<string> ConsoleWrite()
 {
     return x => Console.WriteLine(x);
+}
+
+static async Task SignalR()
+{
+    var signalR = new HubConnectionBuilder()
+                    .WithUrl("http://localhost:5299/signalR/Demo")
+                    .WithAutomaticReconnect()
+                    .Build();
+
+
+    signalR.Reconnected += SignalR_Reconnected;
+    signalR.Reconnecting += SignalR_Reconnecting;
+
+
+
+    Task SignalR_Reconnecting(Exception? arg)
+    {
+        Console.WriteLine("Reconnecting...");
+        return Task.CompletedTask;
+    }
+
+    Task SignalR_Reconnected(string? arg)
+    {
+        Console.WriteLine("Reconnected!");
+        return Task.CompletedTask;
+    }
+
+    signalR.On<string>(nameof(HelloResponse), x => HelloResponse(x));
+    signalR.On<string>("Echo", x => Console.WriteLine(x));
+
+    signalR.On("Welcome", ConsoleWrite());
+    signalR.On("NewConnection", ConsoleWrite());
+    signalR.On("SendMessage", ConsoleWrite());
+
+    await signalR.StartAsync();
+
+
+    await signalR.SendAsync("SayHello");
+    await signalR.SendAsync("SayHelloToMe", "Paul");
+
+    if (DateTime.Now.Second % 2 == 0)
+        await signalR.SendAsync("JoinGroup", "myFavouriteGroup");
+
+
+
+    while (true)
+    {
+        var connectionId = Console.ReadLine();
+        await signalR.SendAsync("Echo", connectionId);
+        await signalR.SendAsync("SendMessage", connectionId, Console.ReadLine());
+    }
+
+
+    Console.ReadLine();
+
+    void HelloResponse(string message)
+    {
+        Console.WriteLine(message);
+    }
 }
