@@ -81,6 +81,7 @@ builder.Services.AddSingleton<AuthService>();
 builder.Services.AddSwaggerGen(x => x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "WebApi", Version = "v1" }))
     .AddSwaggerGenNewtonsoftSupport();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
