@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsServices.Core", "Win
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsServices.Topshelf", "WindowsServices.Topshelf\WindowsServices.Topshelf.csproj", "{4B304488-19D4-41CF-AE9F-EEA7583D0238}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelathCheck", "HelathCheck\HelathCheck.csproj", "{05BE4515-C4A8-4644-B74E-03D7C72DC269}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{4B304488-19D4-41CF-AE9F-EEA7583D0238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B304488-19D4-41CF-AE9F-EEA7583D0238}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B304488-19D4-41CF-AE9F-EEA7583D0238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BE4515-C4A8-4644-B74E-03D7C72DC269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BE4515-C4A8-4644-B74E-03D7C72DC269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BE4515-C4A8-4644-B74E-03D7C72DC269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BE4515-C4A8-4644-B74E-03D7C72DC269}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
