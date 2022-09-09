@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Bogus", "Services.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{C28DF136-B6E6-411E-9758-EE3CDB0A94C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWIN", "OWIN\OWIN.csproj", "{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C28DF136-B6E6-411E-9758-EE3CDB0A94C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C28DF136-B6E6-411E-9758-EE3CDB0A94C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C28DF136-B6E6-411E-9758-EE3CDB0A94C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
