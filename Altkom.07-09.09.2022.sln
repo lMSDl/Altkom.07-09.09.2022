@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWIN", "OWIN\OWIN.csproj", "{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR", "SignalR\SignalR.csproj", "{775ED29F-7179-443D-85C1-D03A71FE023C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE2500BB-4EFB-49B9-A8A1-697FB4478A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775ED29F-7179-443D-85C1-D03A71FE023C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775ED29F-7179-443D-85C1-D03A71FE023C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775ED29F-7179-443D-85C1-D03A71FE023C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775ED29F-7179-443D-85C1-D03A71FE023C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
