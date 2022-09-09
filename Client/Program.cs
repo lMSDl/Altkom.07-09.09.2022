@@ -10,7 +10,26 @@ using System.Net.Http.Json;
 
 var signalR = new HubConnectionBuilder()
                 .WithUrl("http://localhost:5299/signalR/Demo")
+                .WithAutomaticReconnect()
                 .Build();
+
+
+signalR.Reconnected += SignalR_Reconnected;
+signalR.Reconnecting += SignalR_Reconnecting;
+
+
+
+Task SignalR_Reconnecting(Exception? arg)
+{
+    Console.WriteLine("Reconnecting...");
+    return Task.CompletedTask;
+}
+
+Task SignalR_Reconnected(string? arg)
+{
+    Console.WriteLine("Reconnected!");
+    return Task.CompletedTask;
+}
 
 signalR.On<string>(nameof(HelloResponse), x => HelloResponse(x));
 signalR.On<string>("Echo", x => Console.WriteLine(x));
